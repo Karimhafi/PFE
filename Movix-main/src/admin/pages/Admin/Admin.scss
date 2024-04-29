@@ -1,0 +1,43 @@
+.users-table-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    .table-container {
+        background-color: rgba(0, 0, 0, 0.8); // Semi-transparent background
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 700px;
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff; // White text color for readability
+            .table-title {
+                color: #fff; // White color for better visibility on the dark background
+                text-align: center;
+                margin-bottom: 20px; // Add some spacing below the title
+            }
+            th,
+            td {
+                padding: 12px;
+                border-bottom: 1px solid #555; // Darker border for contrast
+                text-align: left;
+            }
+            th {
+                font-weight: bold;
+                background-color: #333; // Slightly darker background for headers
+            }
+            tbody tr:hover {
+                background-color: #333; // Hover effect for rows
+            }
+        }
+    }
+}

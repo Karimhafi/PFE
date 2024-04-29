@@ -1,0 +1,72 @@
+.moviesPage {
+    min-height: 700px;
+    padding-top: 100px;
+    .moviesContainer {
+        padding-top: 100px;
+        display: flex;
+        flex-wrap: wrap; // Enable wrapping of items
+        overflow-x: hidden; // No horizontal scrolling
+        gap: 16px; // Sets gap between the cards
+        padding: 10px; // Padding around the container
+    }
+    .movieCard2 {
+        flex: 0 0 calc(25% - 16px); // Adjust for 4 cards per row, subtracting the gap
+        height: auto; // Adjust height dynamically based on content
+        cursor: pointer;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #000;
+        color: white;
+        margin-bottom: 16px;
+        transition: transform 0.3s;
+        &:hover {
+            transform: scale(1.05);
+        }
+        .posterBlock {
+            position: relative;
+            width: 100%;
+            height: 70%;
+            background-size: cover;
+            background-position: center;
+            .posterImage {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .infoOverlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 10%, transparent);
+            }
+        }
+        .textBlock {
+            padding: 10px;
+            .title {
+                font-size: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .date {
+                font-size: 14px;
+                opacity: 0.5;
+            }
+        }
+    }
+    @media (max-width: 768px) {
+        .movieCard2 {
+            flex: 0 0 45%; // Makes each card take roughly half the container width on smaller screens
+        }
+    }
+    @media (max-width: 480px) {
+        .movieCard2 {
+            flex: 0 0 90%; // Each card takes almost full width on very small screens
+        }
+    }
+}

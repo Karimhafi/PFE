@@ -1,0 +1,76 @@
+    .edit-table-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+        .edit-user-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            .contentWrapper {
+                text-align: center;
+                color: var(--black-light);
+                display: flex;
+                flex-direction: column;
+                .bigText {
+                    font-size: 150px;
+                    font-weight: 700;
+                }
+                .smallText {
+                    font-size: 44px;
+                }
+            }
+            .table-container {
+                padding: 40px;
+                border-radius: 8px;
+                width: 100%;
+                max-width: 700px;
+                h1 {
+                    font-size: 2rem;
+                    color: #333;
+                    text-align: center;
+                    margin-bottom: 1.5rem;
+                }
+                label {
+                    font-size: 1rem;
+                    color: #666;
+                    margin-bottom: 0.5rem;
+                }
+                input[type="text"],
+                input[type="password"] {
+                    width: 100%;
+                    padding: 0.8rem;
+                    font-size: 1rem;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                    margin-bottom: 1rem;
+                    &:focus {
+                        border-color: #0056b3;
+                        outline: none;
+                    }
+                }
+                button {
+                    padding: 0.8rem 1.2rem;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    padding: 12px;
+                    transition: background-color 0.3s;
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+            }
+        }
+    }

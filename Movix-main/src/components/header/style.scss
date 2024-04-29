@@ -1,0 +1,188 @@
+@import "../../mixins.scss";
+.header {
+    position: fixed;
+    transform: translateY(0);
+    width: 100%;
+    height: 60px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: all ease 0.5s;
+    z-index: 2;
+    &.top {
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(3.5px);
+        -webkit-backdrop-filter: blur(3.5px);
+    }
+    &.show {
+        background-color: var(--black3);
+    }
+    &.hide {
+        transform: translateY(-60px);
+    }
+    .contentWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        cursor: pointer;
+        img {
+            height: 50px;
+        }
+    }
+    .menuItems {
+        list-style-type: none;
+        display: none;
+        align-items: center;
+        @include md {
+            display: flex;
+        }
+        // Assuming your SCSS is structured like this, you should ensure the dropdown is only visible on small screens
+        .menuContainer {
+            position: relative;
+            .dropdownArrow {
+                display: none; // Hides the dropdown arrow by default
+                @media (max-width: 768px) {
+                    display: block; // Shows the arrow on mobile devices
+                }
+            }
+            .dropdownMenu {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                background-color: var(--black3);
+                width: 200px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                text-align: center; // Center align the text within
+                padding: 12px;
+                margin: 0 auto;
+                // Center the dropdown horizontally
+            }
+            ul {
+                list-style-type: none; // Removes the default bullet points
+            }
+            li {
+                padding: 10px 20px;
+                color: white;
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--pink);
+                }
+            }
+            .dropdownArrow {
+                @media (max-width: 768px) {
+                    display: block; // Ensures it shows on mobile if toggled.
+                }
+            }
+            .menuItem:hover .dropdownMenu {
+                display: block; // Shows the dropdown menu on hover for desktop, remove if not required
+            }
+            @media (max-width: 768px) {
+                .menuItem:active .dropdownMenu, // Ensures the dropdown shows on tap/click in mobile
+                .menuItem:focus .dropdownMenu {
+                    // Accessibility improvement for focus
+                    display: block;
+                }
+            }
+        }
+        .menuItem {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            margin: 0 15px;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            &.searchIcon {
+                margin-right: 0;
+            }
+            svg {
+                font-size: 18px;
+            }
+            cursor: pointer;
+            &:hover {
+                color: var(--pink);
+            }
+        }
+    }
+    .mobileMenuItems {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        @include md {
+            display: none;
+        }
+        svg {
+            font-size: 18px;
+            color: white;
+        }
+    }
+    &.mobileView {
+        background: var(--black3);
+        .menuItems {
+            display: flex;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: var(--black3);
+            flex-direction: column;
+            width: 100%;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: mobileMenu 0.3s ease forwards;
+        }
+    }
+    .searchbutton {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    .searchBar {
+        width: 100%;
+        height: 60px;
+        background-color: white;
+        position: absolute;
+        top: 60px;
+        animation: mobileMenu 0.3s ease forwards;
+        .searchInput {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            margin-top: 10px;
+            width: 100%;
+            svg {
+                font-size: 20px;
+                flex-shrink: 0;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            input {
+                width: 100%;
+                height: 50px;
+                background-color: white;
+                outline: 0;
+                border: 0;
+                border-radius: 30px 0 0 30px;
+                padding: 0 15px;
+                font-size: 14px;
+                @include md {
+                    height: 60px;
+                    font-size: 20px;
+                    padding: 0 30px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes mobileMenu {
+    0% {
+        transform: translateY(-130%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

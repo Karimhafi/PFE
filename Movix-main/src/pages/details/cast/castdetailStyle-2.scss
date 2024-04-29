@@ -1,0 +1,113 @@
+.cast-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .cast-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-top: 100px; // Adjusted margin-top
+      padding: 15px; // Added padding for breathing space
+
+      .profileImg {
+          width: 100%;
+          height: 100%; // Changed back to 100%
+          margin-right: 20px; // Adjusted margin-right
+          object-fit: cover;
+          object-position: center top;
+          display: block;
+          border-radius: 50%;
+      }
+
+      .cast-details {
+        flex-grow: 1;
+        color: White; // Text color
+
+        .name {
+          font-size: 24px;
+          margin-bottom: 10px;
+          color: #343a40;
+          text-transform: uppercase;
+          font-weight: bold; // Adjusted font weight
+      }
+  
+      p {
+          margin: 10px 0; // Increased margin for better spacing
+          line-height: 1.5; // Improved line height for readability
+          font-size: 16px; // Adjusted font size for paragraphs
+      }
+  
+      .read-more-button {
+          background-color: #007bff;
+          color: #fff;
+          padding: 8px 12px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+  
+          &:hover {
+              background-color: #0056b3;
+          }
+      }
+  
+      }
+  }
+
+  .cast-movie-credits {
+      // Add styles for movie credits section if needed
+  }
+
+  .cast-biography {
+      h2 {
+          font-size: 20px;
+          margin-bottom: 10px;
+          color: #343a40;
+      }
+
+      p {
+          margin-bottom: 10px;
+          color: #6c757d;
+      }
+
+      // Additional styling for biography section if needed
+  }
+
+  @media (max-width: 600px) {
+    .cast-header {
+      flex-direction: column; /* Stack elements vertically on smaller screens */
+      align-items: center;
+  
+      .profileImg {
+        width: 60%; /* Adjusted width for profile image */
+        height: auto; /* Maintain aspect ratio */
+        margin-right: 0; /* No margin on smaller screens */
+        margin-bottom: 10px; /* Added margin bottom for separation */
+      }
+  
+      .cast-details {
+        text-align: center; /* Center-align text */
+        margin-top: 10px; /* Added margin top for separation */
+  
+        .name {
+          font-size: 20px; /* Adjusted font size for name on smaller screens */
+          margin-bottom: 5px;
+        }
+  
+        p {
+          font-size: 14px; /* Adjusted font size for paragraphs on smaller screens */
+          margin: 5px 0; /* Adjusted margin for better spacing */
+        }
+  
+        .read-more-button {
+          font-size: 14px; /* Adjusted font size for the button on smaller screens */
+          margin-top: 10px; /* Added margin top for separation */
+        }
+      }
+    } }
+  
+
+}
