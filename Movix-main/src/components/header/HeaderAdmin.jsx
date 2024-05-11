@@ -115,7 +115,11 @@ import axios from 'axios';
 
     };
 
+    const navigationHandler = (type) => {
 
+            navigate("/Add/movie");
+
+    };
     return (
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
@@ -143,6 +147,12 @@ import axios from 'axios';
                         >
                         Add a admin
                                             </li>
+                                            <li
+                        className="menuItem"
+                        onClick={() => navigationHandler()}
+                    >
+                        Add Movie
+                    </li>
 
 
                     {user.id ? ( // Check if user is logged in

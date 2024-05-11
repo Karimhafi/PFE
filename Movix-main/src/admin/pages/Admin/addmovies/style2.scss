@@ -1,0 +1,55 @@
+.explorePage {
+    .content {
+        display: grid;
+    }
+    .movieRows {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(100% + 20px);
+        margin-left: -10px;
+    }
+    .movieCard {
+        cursor: pointer;
+        /* Adjust for gap */
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        &:hover {
+            transform: scale(1.05);
+        }
+        .posterImage {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+    }
+    .resultNotFound {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+    }
+    .modalButtons button.openModalButton {
+        background-color: #007bff;
+        /* Blue */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .modalButtons button.openModalButton:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+    }
+}

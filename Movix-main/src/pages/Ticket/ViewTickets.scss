@@ -1,0 +1,57 @@
+// ViewTickets.scss
+.view-tickets-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    padding-top: 250px;
+    margin-bottom: 150px;
+}
+
+.tickets-container {
+    background-color: rgba(0, 0, 0, 0.8); // Semi-transparent background
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 800px; // Adjust max-width for responsiveness
+    overflow-y: auto;
+}
+
+h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ticket-table {
+    width: 100%;
+    overflow-y: auto;
+    border-collapse: collapse;
+    th,
+    td {
+        border: 1px solid #fff;
+        padding: 10px;
+        text-align: left;
+        color: #fff;
+    }
+    th {
+        background-color: #333;
+    }
+    tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.no-tickets-message {
+    color: #ff6b6b;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    font-size: 1.2em;
+}

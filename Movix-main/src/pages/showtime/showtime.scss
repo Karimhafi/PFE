@@ -1,0 +1,77 @@
+.profile-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    .movieList {
+        text-align: center;
+        width: 100%; // Ensures the container takes full width
+        margin: 20px;
+        h1 {
+            margin-bottom: 20px;
+        }
+        .movies {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); // Sets up four columns
+            grid-gap: 20px; // Space between the movies
+        }
+        .movie {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .poster {
+                width: 100%;
+                max-width: 150px; // Controls the size of the poster
+                height: auto;
+            }
+            .details {
+                text-align: left;
+                width: 100%; // Full width of the column
+                h2 {
+                    margin-bottom: 10px;
+                }
+                button {
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    cursor: pointer;
+                    width: 100%; // Button takes the full width of the details section
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .movieList .movies {
+        grid-template-columns: repeat(2, 1fr); // Two movies per row on medium screens
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        flex-direction: column;
+        height: auto;
+        .movieList .movies {
+            grid-template-columns: 1fr; // One movie per row on small screens
+        }
+        .movie {
+            .details {
+                button {
+                    padding: 6px 12px; // Smaller padding for smaller screens
+                }
+            }
+        }
+    }
+}

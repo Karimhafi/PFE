@@ -5,74 +5,38 @@
     height: 100vh;
     padding: 20px;
     .table-container {
-        background-color: rgba(0, 0, 0, 0.8); // Semi-transparent background
-        padding: 40px;
+        background-color: #2c3e50;
+        padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        max-width: 700px;
-        h2 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        width: 110%;
+        overflow-x: auto; // Scroll horizontally when needed
         table {
-            width: 100%;
+            width: 110%;
             border-collapse: collapse;
-            color: #fff; // White text color for readability
-            .table-title {
-                color: #fff; // White color for better visibility on the dark background
-                text-align: center;
-                margin-bottom: 20px; // Add some spacing below the title
-            }
-            th,
-            td {
-                padding: 12px;
-                border-bottom: 1px solid #555; // Darker border for contrast
-                text-align: left;
-            }
-            th {
-                font-weight: bold;
-                background-color: #333; // Slightly darker background for headers
-            }
-            tbody tr:hover {
-                background-color: #333; // Hover effect for rows
-            }
-            .delete-button {
-                background-color: rgba(0, 0, 0, 0.8); // Match the table container background
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-                color: white;
-                border: none;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 5px;
-            }
-            .delete-button svg {
-                color: white;
-                /* Style directly the SVG icon from Material-UI */
-            }
+            table-layout: auto; // Change to auto to allow dynamic column widths
         }
-        .message-container {
-            position: fixed; // Make it fixed to stay in the viewport
-            top: 90%; // Center vertically
-            left: 50%; // Center horizontally
-            transform: translate(-50%, -50%); // Adjust to exactly center the div
-            padding: 20px 40px; // Padding around the text
-            background-color: rgba(0, 0, 0, 0.8); // Match the table container background
-            color: white; // White text color
-            text-align: center; // Center the text inside the div
-            border-radius: 8px; // Rounded corners
-            box-shadow: white; // Subtle shadow for depth
-            font-size: 1.2rem; // Larger text for readability
-            z-index: 1000; // Ensure it's on top of other elements
-            min-width: 300px; // Minimum width of the message box
-            max-width: 80%; // Maximum width of the message box
-            box-sizing: border-box; // Include padding in width calculation
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #7f8c8d;
+            text-align: left;
+            word-wrap: break-word; // Ensures text doesn't overflow
         }
-        .hidden {
-            display: none; // Class to hide the message container when not needed
+        th {
+            background-color: #34495e;
+        }
+        tbody tr:hover {
+            background-color: #34495e;
+        }
+    }
+    .edit-button,
+    .delete-button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        svg {
+            color: #ecf0f1;
         }
     }
 }

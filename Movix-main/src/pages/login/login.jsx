@@ -66,7 +66,7 @@ function Login() {
             {loading ? 'Logging in...' : 'Log In'}
           </button>
           <div className="form-group">
-  <button onClick={goregister} className="re-button"> register a account Here</button>
+  <button onClick={goregister} className="re-button"> register </button>
           </div>
 
           {error && <div className="error-message">{error}</div>}

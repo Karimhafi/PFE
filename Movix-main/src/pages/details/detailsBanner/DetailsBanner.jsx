@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import Snackbar from '../../../components/snackbar/snackbar'; // Import the Snackbar component
+import Snackbar2 from '../../../components/snackbar/snackbar'; // Import the Snackbar component
 
 import "./style.scss";
 
@@ -14,18 +15,21 @@ import Img from "../../../components/lazyLoadImage/Img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
+import axios from 'axios';
 
 const DetailsBanner = ({ video, crew }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
     const [addStatus, setAddStatus] = useState('');
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [showSnackbar2, setShowSnackbar2] = useState(false);
+    const [message2, setMessage2] = useState('');
+
     const [message, setMessage] = useState('');
     const { mediaType, id } = useParams();
     const { data, loading } = useFetch(`/${mediaType}/${id}`);
 
     const { url } = useSelector((state) => state.home);
-
     const _genres = data?.genres?.map((g) => g.id);
     const user = useSelector((state) => state.user); // Access user data from the Redux store
 
@@ -33,6 +37,10 @@ const DetailsBanner = ({ video, crew }) => {
     const writer = crew?.filter(
         (f) => f.job === "Screenplay" || f.job === "Story" || f.job === "Writer"
     );
+
+
+
+
     const addToUserList = async () => {
         const userId = user.id; // Example static user ID, replace or manage via user authentication
         const title = data.name || data.title;
@@ -68,7 +76,8 @@ const DetailsBanner = ({ video, crew }) => {
             }, 3000);
         }
     };
-    const toHoursAndMinutes = (totalMinutes) => {
+
+     const toHoursAndMinutes = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
         return `${hours}h${minutes > 0 ? ` ${minutes}m` : ""}`;
@@ -79,6 +88,7 @@ const DetailsBanner = ({ video, crew }) => {
             {!loading ? (
                 <>
                             <Snackbar message={message} open={showSnackbar} onClose={() => setShowSnackbar(false)} />
+                            <Snackbar2 message={message2} open={showSnackbar2} onClose={() => setShowSnackbar2(false)} />
 
                     {!!data && (
                         <React.Fragment>
@@ -114,6 +124,9 @@ const DetailsBanner = ({ video, crew }) => {
                             +
                              </button>
                                 )}
+
+
+
                             </div>
                                         <div className="title">
                                             {`${

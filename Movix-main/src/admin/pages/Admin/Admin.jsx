@@ -38,7 +38,7 @@ function Admintable() {
                                     <td>{user.username}</td>
                                     <td>{user.Phone_number || "empty"}</td>
                                     <td>{user.role}</td>
-                                    <td>{user.Country || "empty"}</td>
+                                    <td>{user.country || "empty"}</td>
                                 </tr>
                             ))}
                         </tbody>

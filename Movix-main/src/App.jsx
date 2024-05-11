@@ -12,8 +12,8 @@ import SearchResult from './pages/searchResult/SearchResult';
 import Explore from './pages/explore/Explore';
 import PageNotFound from './pages/404/PageNotFound';
 import Castdetail from './pages/details/cast/CastDetails';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
+import Login from './pages/login/login';
+import Register from './pages/register/register';
 import Profile from './pages/profile/Profile';
 import MovieList from './pages/MovieList/Addmovie';
 import TVLIST from './pages/TVlist/TVLIST';
@@ -25,9 +25,12 @@ import Unauthorized from './pages/404/unauthorized';
 import UsersTable from './admin/pages/Users/listofusers';
 import Admintable from './admin/pages/Admin/Admin';
 
+import AdminExplore from './admin/pages/Admin/addmovies/AddMovie';
+
 import EditUser from './admin/pages/Users/EditUser';
 import AddAdmin from './admin/pages/Admin/Users/AdminAdd';
-
+import ViewTickets from './pages/Ticket/ViewTickets';
+import Showtime from './pages/showtime/showtime';
 function App() {
     const dispatch = useDispatch();
 
@@ -68,6 +71,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="/view-tickets" element={<ProtectedRoute><ViewTickets /></ProtectedRoute>} />
 
                 <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
@@ -77,8 +81,10 @@ function App() {
                 <Route path="/:mediaType/:id" element={<ProtectedRoute><Details /></ProtectedRoute>} />
                 <Route path="/search/:query" element={<ProtectedRoute><SearchResult /></ProtectedRoute>} />
                 <Route path="/Castdetail/:person_id" element={<ProtectedRoute><Castdetail /></ProtectedRoute>} />
+                <Route path="/showtimelist" element={<ProtectedRoute><Showtime/></ProtectedRoute>} />
 
 
+                <Route path="/Add/movie" element={<ProtectedRouteAdmin><AdminExplore /></ProtectedRouteAdmin>} />
 
 
                 <Route path="/list-of-users" element={<ProtectedRouteAdmin><UsersTable /></ProtectedRouteAdmin>} />

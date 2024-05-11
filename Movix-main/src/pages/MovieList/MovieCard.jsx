@@ -13,7 +13,7 @@ function MovieCard2({ data }) {
     return (
         <div className="movieCard2" onClick={handleCardClick}>
             <div className="posterBlock">
-                <img src={`https://image.tmdb.org/t/p/original${data.poster_path}`} alt={data.title} className="posterImage"/>
+                <img src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt={data.title} className="posterImage"/>
                 <div className="infoOverlay">
                     <div className="circleRating">{data.vote_average.toFixed(1)}</div>
                     <div className="genres">{/* Render genres here if needed */}</div>

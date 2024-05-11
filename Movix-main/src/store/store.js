@@ -8,15 +8,15 @@ import homeReducer from './homeSlice';
 
 // Define the parts of the state to persist
 const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['user'], // Only persist the 'user' slice
+    key: 'root',
+    storage,
+    whitelist: ['user'], // Only persist the 'user' slice
 };
 
 // Combine reducers
 const rootReducer = combineReducers({
-  user: userReducer,
-  home: homeReducer,
+    user: userReducer,
+    home: homeReducer,
 });
 
 // Create the persisted reducer
@@ -24,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create the Redux store
 export const store = configureStore({
-  reducer: persistedReducer,
+    reducer: persistedReducer,
 });
 
 // Create the persisted store

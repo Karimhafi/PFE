@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
 const session = require('express-session');
 const cors = require('cors'); // Require the CORS package
 const bcrypt = require('bcrypt'); // Import bcrypt here
 const multer = require('multer');
 const axios = require('axios');
+const mysql = require('mysql2');
 
 // Multer configuration for handling file uploads
 const upload = multer({ dest: 'uploads/' });
@@ -396,6 +396,179 @@ app.post('/api/admins', (req, res) => {
             return res.status(500).send({ message: 'Error adding new admin' });
         }
         res.status(201).send({ message: 'New admin added successfully' });
+    });
+});
+
+app.post('/api/tickets', (req, res) => {
+    const { userId, movie_id, cinemaName, seatNumber, showtime, cinemaAddress, showtimeId } = req.body;
+    console.log(movie_id);
+    // Start a transaction
+    connection.beginTransaction(err => {
+        if (err) { return res.status(500).send('Database transaction start failed.'); }
+
+        // Query to insert a new ticket
+        const insertTicketQuery = `
+            INSERT INTO Tickets (user_id, movie_id, cinema_name, seat_number, showtime, cinema_address)
+            VALUES (?, ?, ?, ?, ?, ?);
+        `;
+
+        connection.query(insertTicketQuery, [userId, movie_id, cinemaName, seatNumber, showtime, cinemaAddress], (err, results) => {
+            if (err) {
+                return connection.rollback(() => {
+                    console.error('Error inserting ticket:', err);
+                    res.status(500).send('Error inserting ticket');
+                });
+            }
+
+            // Query to update the seat as booked
+            const updateSeatQuery = `
+                UPDATE Seats SET is_booked = true WHERE seat_id = ? AND showtime_id = ?;
+            `;
+
+            connection.query(updateSeatQuery, [seatNumber, showtimeId], (err, results) => {
+                if (err) {
+                    return connection.rollback(() => {
+                        console.error('Error updating seat:', err);
+                        res.status(500).send('Error booking seat');
+                    });
+                }
+                // Commit the transaction
+                connection.commit(err => {
+                    if (err) {
+                        return connection.rollback(() => {
+                            console.error('Error committing transaction:', err);
+                            res.status(500).send('Transaction commit failed');
+                        });
+                    }
+
+                    res.send('Ticket booked and seat updated successfully');
+                });
+            });
+        });
+    });
+});
+
+
+
+
+app.get('/api/tickets/user/:userId', async(req, res) => {
+    const { userId } = req.params; // Extract the user ID from the URL parameters
+
+    if (!userId) {
+        return res.status(400).send('User ID is required');
+    }
+
+    const query = `
+        SELECT * FROM tickets WHERE user_id = ?
+    `;
+
+    try {
+        const [tickets] = await connection.promise().query(query, [userId]);
+        if (tickets.length === 0) {
+            return res.status(404).send('No tickets found for this user');
+        }
+        res.json(tickets);
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).send('Failed to retrieve tickets');
+    }
+});
+app.get('/info/movies/:id', async(req, res) => {
+    const { id } = req.params;
+    const BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTY5M2NmNTFhYTFkMjI3ZDNmMTM3NmRiMmNjY2Y3ZCIsInN1YiI6IjY1OTU1ZTYyNTkwN2RlMmNmNzYzYmVmYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.081mtreNm2pj0iZBu4cLmhAUQQaq3eHNZYm2nUly6Mo';
+
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+            headers: {
+                Authorization: `Bearer ${BEARER_TOKEN}`
+            }
+        });
+        const movieData = response.data;
+        res.json(movieData);
+    } catch (error) {
+        console.error('Error fetching movie details:', error);
+        res.status(500).json({ error: 'Failed to fetch movie details' });
+    }
+});
+app.post('/api/showtimes', (req, res) => {
+    const { movie_id, show_datetime } = req.body; // Adjusted to use a single datetime field
+    const showtimeQuery = `INSERT INTO Showtimes (movie_id, show_datetime) VALUES (?, ?)`;
+
+    connection.query(showtimeQuery, [movie_id, show_datetime], (err, result) => {
+        if (err) {
+            res.status(500).send('Error adding showtime');
+            return;
+        }
+
+        // If the showtime is successfully added, generate 100 seats for this showtime
+        const showtimeId = result.insertId;
+        const seats = [];
+        for (let i = 1; i <= 100; i++) {
+            seats.push([showtimeId, i, false]);
+        }
+
+        const seatsQuery = 'INSERT INTO Seats (showtime_id, seat_number, is_booked) VALUES ?';
+        connection.query(seatsQuery, [seats], (err, result) => {
+            if (err) {
+                res.status(500).send('Error adding seats');
+            } else {
+                res.status(201).send('Showtime and seats added successfully', );
+            }
+        });
+    });
+});
+
+
+
+app.get("/api/showtimes/movies", async(req, res) => {
+    try {
+        // Extract unique movie IDs from showtimes table
+        const query = "SELECT DISTINCT movie_id, show_datetime, showtime_id FROM showtimes ORDER BY show_datetime";
+        connection.query(query, (error, results) => {
+            if (error) {
+                return res.status(500).json({ error: "Error fetching movie IDs" });
+            }
+
+            // Map movie IDs to fetch details
+            const movieDetailsPromises = results.map((result) =>
+                axios.get(`https://api.themoviedb.org/3/movie/${result.movie_id}`, {
+                    headers: {
+                        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTY5M2NmNTFhYTFkMjI3ZDNmMTM3NmRiMmNjY2Y3ZCIsInN1YiI6IjY1OTU1ZTYyNTkwN2RlMmNmNzYzYmVmYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.081mtreNm2pj0iZBu4cLmhAUQQaq3eHNZYm2nUly6Mo`
+                    }
+                })
+                .then(response => ({
+                    movie_id: result.movie_id,
+                    show_datetime: result.show_datetime,
+                    showtime_id: result.showtime_id,
+                    details: response.data
+                }))
+            );
+
+            // Process all promises and return movie details with showtimes
+            Promise.all(movieDetailsPromises)
+                .then(movieDetails => {
+                    res.json(movieDetails);
+                })
+                .catch(error => {
+                    console.error("Error fetching movie details:", error);
+                    res.status(500).json({ error: "Error fetching movie details" });
+                });
+        });
+    } catch (error) {
+        console.error("Error processing request:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+app.get('/available-seats/:showtimeId', (req, res) => {
+    const showtimeId = req.params.showtimeId;
+    const query = `SELECT seat_id, seat_number, is_booked FROM Seats WHERE showtime_id = ?`;
+
+    connection.query(query, [showtimeId], (err, results) => {
+        if (err) {
+            res.status(500).send('Error fetching seats data');
+            return;
+        }
+        res.json(results); // This will send an array of objects with seat_id, seat_number, and is_booked
     });
 });
 

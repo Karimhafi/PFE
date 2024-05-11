@@ -134,7 +134,11 @@ import axios from 'axios';
         navigate("/profile");
 
     };
+    const Tickets = () => {
 
+        navigate("/view-tickets");
+
+    };
     const toggleDropdown = () => setIsOpen(!isOpen);
     const GOTOMovies = () => {
 
@@ -146,6 +150,13 @@ import axios from 'axios';
         navigate("/tvlist/tv");
         setIsOpen(false);
     };
+    const showtimelist = () => {
+
+        navigate("/showtimelist");
+        setIsOpen(false);
+    };
+
+
     return (
         <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
             <ContentWrapper>
@@ -167,6 +178,19 @@ import axios from 'axios';
                     >
                         TV Shows
                     </li>
+                    <li
+                        className="menuItem"
+                        onClick={() => Tickets()}
+                    >
+                    Tickets
+                    </li>
+                    <li
+                        className="menuItem"
+                        onClick={() => showtimelist()}
+                    >
+                    Showtime list
+                    </li>
+
                     {user.id ? ( // Check if user is logged in
                         <>
 

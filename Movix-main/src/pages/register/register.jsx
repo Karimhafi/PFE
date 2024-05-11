@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.scss'; // Make sure the SCSS file is named and imported correctly
 import Spinner from '../../components/spinner/Spinner';
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ function Register() {
   const [password2, setPassword2] = useState('');
   const [loading, setLoading] = useState(false);
   const [done, setdone] = useState('');
+  const navigate = useNavigate();
 
   const [error, setError] = useState('');
 
@@ -62,10 +64,12 @@ if (response.status==200)  {     // Redirect or handle additional logic here
               <label>Confirm Password</label>
               <input type="password" placeholder="Confirm your password" value={password2} onChange={e => setPassword2(e.target.value)} required />
             </div>
-            <button type="submit" className="login-button">Register</button>
+            <button type="submit" className="login-button" style={{marginBottom:5}}>Register</button>
+
             {error && <div className="error-message">{error}</div>}
             {done && <div className="done-message">{done}</div>}          </form>
 
+            <button onClick={gologin} className="login-button">Login</button>
 
         </div>
 
