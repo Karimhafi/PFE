@@ -29,6 +29,8 @@ import AdminExplore from './admin/pages/Admin/addmovies/AddMovie';
 
 import EditUser from './admin/pages/Users/EditUser';
 import AddAdmin from './admin/pages/Admin/Users/AdminAdd';
+import ListOfmovies from './admin/pages/Admin/ListofMovies/ListOfmovies';
+
 import ViewTickets from './pages/Ticket/ViewTickets';
 import Showtime from './pages/showtime/showtime';
 function App() {
@@ -90,6 +92,7 @@ function App() {
                 <Route path="/list-of-users" element={<ProtectedRouteAdmin><UsersTable /></ProtectedRouteAdmin>} />
                 <Route path="/edit-user/:userId" element={<ProtectedRouteAdmin><EditUser /></ProtectedRouteAdmin>} />
                 <Route path="/AddAdmin" element={<ProtectedRouteAdmin><AddAdmin /></ProtectedRouteAdmin>} />
+                <Route path="/Listmovie" element={<ProtectedRouteAdmin><ListOfmovies /></ProtectedRouteAdmin>} />
 
                 <Route path="/list-of-Admin" element={<ProtectedRouteAdmin><Admintable /></ProtectedRouteAdmin>} />
 

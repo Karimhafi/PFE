@@ -19,7 +19,8 @@ const ViewTickets = () => {
             .get(`http://localhost:3001/api/tickets/user/${user.id}`)
             .then((response) => {
                 setTickets(response.data);
-                console.log(response.data)   ;             setLoading(false);
+                console.log("tickets",tickets);
+                          setLoading(false);
             })
             .catch((error) => {
                 setError('Failed to fetch tickets');
@@ -31,7 +32,6 @@ const ViewTickets = () => {
         try {
             const response = await axios.get(`http://localhost:3001/info/movies/${movie_id}`);
             const movieDetails = response.data;
-
             const TMDB_TOKEN = import.meta.env.VITE_APP_TMDB_TOKEN;
             const headers = {
                 Authorization: "Bearer " + TMDB_TOKEN,
@@ -39,10 +39,12 @@ const ViewTickets = () => {
             const imagesResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/images`, {
                 headers: headers
             });
+
             const imagesData = imagesResponse.data;
             const poster = imagesData.posters[0].file_path;
-            const posterUrl = `https://image.tmdb.org/t/p/original/${poster}`;
+            const posterUrl = `https://image.tmdb.org/t/p/original${poster}`;
             const doc = new jsPDF("p", "mm", [510, 297]); // A4 size: [width, height]
+            console.log(posterUrl)   ;
 
             const logoImage = new Image();
             logoImage.src = '/movix-logo.png';

@@ -572,6 +572,18 @@ app.get('/available-seats/:showtimeId', (req, res) => {
     });
 });
 
+app.delete("/api/showtimes/movies/:showtimeId", (req, res) => {
+    const showtimeId = req.params.showtimeId;
+    const query = "DELETE FROM showtimes WHERE showtime_id = ?";
+
+    connection.query(query, [showtimeId], (error, results) => {
+        if (error) {
+            console.error("Error deleting showtime:", error);
+            return res.status(500).json({ error: "Error deleting showtime" });
+        }
+        res.json({ message: "Showtime deleted successfully" });
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

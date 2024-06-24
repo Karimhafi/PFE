@@ -56,8 +56,8 @@ function UsersTable() {
                                 <th>Country</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th>Count of movie</th>
-                                <th>Count of TV</th>
+                                <th>Count of Movies</th>
+                                <th>Count of TV Shows</th>
                             </tr>
                         </thead>
                         <tbody>

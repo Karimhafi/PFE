@@ -1,14 +1,16 @@
-.users-table-page {
+.list-of-movies-page {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    .table-container {
+    padding: 20px;
+    .movies-table-container {
         background-color: #2c3e50;
         padding: 20px;
         border-radius: 8px;
-        max-width: 900px !important;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        width: 90%;
+        overflow-x: auto; // Scroll horizontally when needed
         h2.table-title {
             color: #ecf0f1;
             margin-bottom: 20px;
@@ -34,21 +36,23 @@
             }
         }
     }
-    .edit-button,
     .delete-button {
         background: transparent;
         border: none;
         cursor: pointer;
         svg {
-            color: #ecf0f1;
+            color: #e74c3c;
         }
     }
-    .message-container {
-        margin-top: 20px;
-        padding: 10px;
+    .snackbar {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         background-color: #27ae60;
         color: #ecf0f1;
+        padding: 10px;
         border-radius: 4px;
-        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 }

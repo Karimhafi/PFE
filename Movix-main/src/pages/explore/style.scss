@@ -86,16 +86,23 @@
         }
     }
     .content {
-        display: flex;
-        flex-flow: row wrap;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
         gap: 10px;
         margin-bottom: 50px;
         @include md {
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
         }
         .movieCard {
+            width: 100%;
             .posterBlock {
                 margin-bottom: 30px;
+                img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
             }
         }
     }
