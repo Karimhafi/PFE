@@ -1,20 +1,16 @@
 .explorePage {
     .content {
         display: grid;
-    }
-    .movieRows {
-        display: flex;
-        flex-wrap: wrap;
-        width: calc(100% + 20px);
-        margin-left: -10px;
+        grid-template-columns: repeat(4, 1fr); // Create 4 equal columns
+        gap: 20px; // Space between the movie cards
+        justify-items: center; // Center items within each grid cell
     }
     .movieCard {
         cursor: pointer;
-        /* Adjust for gap */
-        margin-left: 10px;
         transition: transform 0.3s ease;
         display: flex;
         flex-direction: column;
+        align-items: center; // Center content within each movie card
         &:hover {
             transform: scale(1.05);
         }
@@ -28,6 +24,21 @@
             font-size: 16px;
             font-weight: bold;
             color: #333;
+            text-align: center; // Center align the title text
+        }
+        .addButton {
+            background-color: green;
+            width: 80px;
+            margin-top: 10px;
+            padding: 5px 0;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            &:hover {
+                background-color: darkgreen;
+            }
         }
     }
     .resultNotFound {

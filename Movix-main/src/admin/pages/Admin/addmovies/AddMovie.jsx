@@ -12,7 +12,7 @@ const AdminExplore = () => {
     const [loading, setLoading] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const TMDB_TOKEN =import.meta.env.VITE_APP_TMDB_TOKEN;
+    const TMDB_TOKEN = import.meta.env.VITE_APP_TMDB_TOKEN;
 
     const fetchMovies = async () => {
         setLoading(true);
@@ -42,7 +42,6 @@ const AdminExplore = () => {
         setShowModal(true);
     };
 
-
     const handleCloseModal = () => {
         setSelectedMovie(null);
         setShowModal(false);
@@ -56,25 +55,30 @@ const AdminExplore = () => {
                 </div>
                 {loading && <Spinner initial={true} />}
                 {!loading && (
-                  <div className="content">
-                  {movies.length > 0 ? (
-                      <div className="movieRows">
-                   {movies.map((movie, index) => (
-    <div key={index} className="movieCard">
-        <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} className="posterImage"/>
-        <div className="title">{movie.title}</div>
-        <button  style={{backgroundColor:'green',width:'30%',marginTop:'10px'}} onClick={() => handleMovieClick(movie)}>ADD</button>
-    </div>
-))}
-
-                      </div>
-                  ) : (
-                      <span className="resultNotFound">
-                          Sorry, Results not found!
-                      </span>
-                  )}
-              </div>
-
+                    <div className="content">
+                        {movies.length > 0 ? (
+                            movies.map((movie, index) => (
+                                <div key={index} className="movieCard">
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                                        alt={movie.title}
+                                        className="posterImage"
+                                    />
+                                    <div className="title">{movie.title}</div>
+                                    <button
+                                        className="addButton"
+                                        onClick={() => handleMovieClick(movie)}
+                                    >
+                                        ADD
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <span className="resultNotFound">
+                                Sorry, Results not found!
+                            </span>
+                        )}
+                    </div>
                 )}
                 {showModal && (
                     <ShowtimeModal

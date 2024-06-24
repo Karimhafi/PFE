@@ -202,7 +202,7 @@ import axios from 'axios';
 
                             <div className="menuContainer">
             <div className="menuItem" onClick={toggleDropdown}>
-                List Media <span className="dropdownArrow">▼</span>
+                My List <span className="dropdownArrow">▼</span>
             </div>
             {isOpen && (
                 <ul className="dropdownMenu">
